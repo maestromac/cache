@@ -78,7 +78,11 @@ export async function restoreImpl(
         if (lookupOnly) {
             core.info(`Cache found and can be restored from key: ${cacheKey}`);
         } else {
-            core.info(`Cache restored from key: ${cacheKey}`);
+            if (isExactKeyMatch) {
+                core.info(`Cache restored from primary-key: ${cacheKey}`)
+            } else {
+                core.info(`Primary-key not found but cache restored from restore-key: ${cacheKey}`);
+            }
         }
 
         return cacheKey;
